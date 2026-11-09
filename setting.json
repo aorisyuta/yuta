@@ -1,8 +1,0 @@
-{
-  "_説明": "例の値です。当日のマップに合わせて x, y, qr を書き換えること。x は奥へ cm、y は左が + の cm。離陸地点が (0, 0)",
-  "order": ["A", "B"],
-  "points": [
-    {"name": "A", "qr": 1, "x": 300, "y": 0,   "clip_alt_cm": 50, "clip_timeout_s": 15},
-    {"name": "B", "qr": 2, "x": 600, "y": 80,  "clip_alt_cm": 50, "clip_timeout_s": 15}
-  ]
-}
