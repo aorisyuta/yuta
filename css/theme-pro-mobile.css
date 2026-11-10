@@ -1,0 +1,149 @@
+/* =====================================================================
+   画面サイズ別
+   ===================================================================== */
+/* 文字ラベルは広い画面だけ。それ以外はアイコン + ツールチップ */
+@media (max-width:1500px){
+  html.pro #bImport span,html.pro #bExport span,html.pro #bInsp span,html.pro #bCalc span,html.pro #bAll span,html.pro #bPal2 span,html.pro #bSample span,
+  html.pro #tJunc span,html.pro #tDel span,html.pro #tMarq span{display:none}
+  html.pro .brand span{display:none}
+}
+@media (max-width:1280px){
+  html.pro .cmdbtn{min-width:0}
+  html.pro .cmdbtn span,html.pro .cmdbtn kbd,html.pro #tProbe span,html.pro #tWire span{display:none}
+  html.pro .palette{flex-basis:216px;width:216px}
+}
+@media (max-width:1100px){
+  html.pro #bImport,html.pro #bExport,html.pro #bTheme,html.pro #bCalc{display:none!important}
+  html.pro .pro-more{display:inline-flex}
+  html.pro #bSim span{display:none}
+  html.pro .inspector{border-radius:0;box-shadow:var(--shadow-lg);top:0;bottom:0;width:min(300px,88vw)}
+  html.pro .brand b{display:none}
+}
+
+/* タッチ操作 (タブレット / スマホ): 押しやすい大きさ */
+@media (pointer:coarse){
+  html.pro{--ctl:36px;--barH:46px;--footH:26px}
+  html.pro .bar{flex-wrap:wrap}
+  html.pro .bar .tools{order:0;flex:0 1 auto;border-top:0;padding-top:0}
+  html.pro .btn{padding:0 10px;font-size:13px}
+  html.pro .btn.icon{min-width:var(--ctl)}
+  html.pro .btn svg{width:18px;height:18px}
+  html.pro .zoombox .btn{height:34px;min-height:34px;padding:0 12px;font-size:13px}
+  html.pro .monotoggle{height:34px;min-height:34px}
+  html.pro .itabs button{height:40px;font-size:12.5px}
+  html.pro .field input,html.pro .field select{height:36px;font-size:15px}
+  html.pro .ls-in{height:36px}
+  html.pro .ls-in input{font-size:15px}
+  html.pro .lc{height:28px;padding:0 10px;font-size:12px}
+  html.pro .pclose{width:36px;height:36px;font-size:20px}
+  html.pro .phead{height:40px}
+  html.pro .dk-types button{height:34px;padding:0 12px;font-size:12.5px}
+  html.pro .dk-f input,html.pro .dk-f select{height:34px}
+  html.pro #dkRun{height:36px}
+  html.pro .dk-tabs button{height:38px}
+  html.pro .pro-menu button{min-height:44px;font-size:14px}
+  html.pro .actbar .btn{height:36px}
+  html.pro .pitem{min-height:46px}
+}
+
+/* タブレット縦・小さいノート */
+@media (max-width:900px){
+  html.pro .px-side{flex:0 0 40%;border-left:0;border-top:1px solid var(--chrome-line)}
+}
+
+/* ---------- スマートフォン ---------- */
+@media (max-width:640px){
+  html.pro{--barH:46px;--botH:calc(52px + env(safe-area-inset-bottom,0px))}
+  html.pro body.pcbx-on{--botH:0px}
+  html.pro .bar,html.pro .bar.wrap{flex-wrap:nowrap;padding:0 4px 0 8px;gap:2px}
+  html.pro .bar > .sep,html.pro .bar > .spacer{display:none}
+  html.pro .brand{padding:0 4px 0 0}
+  html.pro .brand b,html.pro .brand span{display:none}
+  html.pro .bar > .tabs{flex:1 1 auto;min-width:0}
+  html.pro .bar > .tabs button{flex:1 1 0;min-width:0;padding:0 4px;font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  html.pro .bar > .tabs button[aria-selected="true"]::after{left:6px;right:6px}
+  html.pro #bImport,html.pro #bExport,html.pro #bTheme,html.pro #bInsp,html.pro #bCalc,html.pro .pro-badge{display:none!important}
+  html.pro .pro-more{display:inline-flex}
+  html.pro .cmdbtn{border:0!important;background:transparent!important;color:var(--muted)!important}
+
+  /* ツールは画面下の 1 段に並べ、横にスクロール */
+  html.pro .bar > .tools{position:fixed;left:0;right:0;bottom:0;z-index:20;height:var(--botH);padding:0 6px env(safe-area-inset-bottom,0px);
+    background:var(--chrome);border-top:1px solid var(--chrome-line);flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden;
+    gap:2px;align-items:center;justify-content:flex-start;order:0;scrollbar-width:none;
+    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 18px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 18px),transparent)}
+  html.pro .bar > .tools::-webkit-scrollbar{display:none}
+  html.pro .bar > .tools[hidden]{display:none!important}
+  html.pro body.pcbx-on .bar > .tools{display:none!important}
+  html.pro .bar > .tools .toolgroup{flex:0 0 auto;padding-right:3px}
+  html.pro .bar > .tools .btn{height:42px;min-width:42px;padding:0 9px;justify-content:center}
+  html.pro .bar > .tools .btn span{display:none}
+  html.pro #pcbTools .btn span{display:inline}
+  html.pro #pcbTools > .btn{flex:0 0 auto}
+  html.pro #pcbTools .sep{display:block;flex:0 0 1px}
+  html.pro #pcbTools #viewTabs{flex:0 0 auto}
+  html.pro #pcbTools #viewTabs button{height:36px;padding:0 10px}
+
+  /* 部品リスト = 左から出るドロワー / 情報パネル = 下から出るシート */
+  html.pro .palette{position:absolute;left:0;top:0;bottom:0;z-index:8;width:min(300px,86vw);box-shadow:var(--shadow-lg)}
+  html.pro .palette[hidden]{display:none!important}
+  html.pro .inspector{position:absolute;left:0;right:0;top:auto;bottom:0;width:auto;height:min(62%,520px);border-left:0;border-top:1px solid var(--line2);border-radius:8px 8px 0 0;box-shadow:var(--shadow-lg);z-index:8}
+  html.pro .inspector[hidden]{display:none!important}
+  html.pro .zoombox{right:6px!important;top:6px!important}
+  html.pro .zoombox #zFit,html.pro .zoombox #pxZf{padding:0 9px}
+
+  /* フッター: ヒントは 2 行まで、数値ステータスは隠す */
+  html.pro .pro-foot{min-height:0}
+  html.pro .pro-foot .status{display:none}
+  html.pro .pro-foot .hint{white-space:normal;line-height:1.45;padding:4px 10px;font-size:11.5px;display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+
+  html.pro .modal{align-items:flex-end;padding:0}
+  html.pro .sheet,html.pro .sheet.wide{width:100%;max-width:none;max-height:90%;border-radius:8px 8px 0 0;padding-bottom:env(safe-area-inset-bottom,0px)}
+  html.pro .cmdk{padding:8px}
+  html.pro .px-bar{padding:4px;gap:4px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
+    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 18px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 18px),transparent)}
+  html.pro .px-bar::-webkit-scrollbar{display:none}
+  html.pro .px-bar > *{flex:0 0 auto}
+  html.pro .px-bar .toolgroup{flex-wrap:nowrap!important;display:flex!important}
+  html.pro .px-bar .btn{padding:0 8px;font-size:12px}
+  /* シミュレーション: 波形が読める高さを確保 */
+  html.pro .simdock{height:clamp(52vh,var(--dockH,300px),72vh)}
+  html.pro .stage.docked #cv{height:calc(100% - clamp(52vh,var(--dockH,300px),72vh))!important}
+  html.pro .dk-head{gap:4px 6px;padding:4px 6px 0}
+  html.pro .dk-params{gap:4px 8px}
+  html.pro .toasts{width:calc(100% - 24px)}
+  html.pro .dk-types button{padding:0 8px}
+}
+@media (max-width:360px){
+  html.pro .bar > .tabs button{font-size:11.5px;padding:0 2px}
+  html.pro .bar > .btn{min-width:34px;padding:0 6px}
+}
+
+/* ---------- 横向きのスマホ (高さが低い) ---------- */
+@media (max-height:520px) and (min-width:641px){
+  html.pro{--barH:42px;--ctl:34px}
+  html.pro .bar,html.pro .bar.wrap{flex-wrap:nowrap!important;padding:0 4px 0 6px;gap:2px}
+  html.pro .bar > .sep,html.pro .bar > .spacer,html.pro .brand b,html.pro .brand span{display:none}
+  html.pro .bar > .tabs button{padding:0 8px}
+  html.pro .bar > .tools,html.pro .bar.wrap > .tools{order:0!important;flex:1 1 auto!important;min-width:0;flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:none;
+    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 16px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 16px),transparent)}
+  html.pro .bar > .tools::-webkit-scrollbar{display:none}
+  html.pro .bar > .tools .toolgroup{flex:0 0 auto;flex-wrap:nowrap}
+  html.pro .bar > .tools .btn span{display:none}
+  html.pro #pcbTools .btn span{display:inline}
+  html.pro .cmdbtn{border:0!important;background:transparent!important}
+  html.pro .btn.pro-badge span{display:none}
+  html.pro .palette{position:absolute;left:0;top:0;bottom:0;z-index:8;width:min(280px,46vw);box-shadow:var(--shadow-lg)}
+  html.pro .palette[hidden]{display:none!important}
+  html.pro .pro-foot .status{display:none}
+  html.pro .px-bar{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  html.pro .px-bar > *{flex:0 0 auto}
+  html.pro .px-body{flex-direction:row}
+  html.pro .px-side{flex:0 0 280px;border-top:0;border-left:1px solid var(--chrome-line)}
+  html.pro .simdock{height:min(var(--dockH,300px),62vh)}
+  html.pro .stage.docked #cv{height:calc(100% - min(var(--dockH,300px),62vh))!important}
+}
+
+/* シミュレーションを開いたときのキャンバス: canvas は top/bottom 指定だけでは縮まないので高さで指定する
+   (以前は波形パネルの裏に回路図が隠れ、全体表示もずれていた) */
+.stage.docked #cv{bottom:auto!important;height:calc(100% - var(--dockH,0px))}
+@media (max-width:640px){ .stage.docked #cv{height:calc(100% - min(var(--dockH,300px),60vh))} }

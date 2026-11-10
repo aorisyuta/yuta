@@ -1,0 +1,353 @@
+/* =====================================================================
+   UniBoard SPICE — Android (Material Design 3) の見た目
+   html.md のときだけ効く。配色は種色 #0A7A62 から作った M3 のトーン
+   ===================================================================== */
+html.md{
+  --md-primary:#006B56; --md-on-primary:#FFFFFF;
+  --md-primary-container:#9CF4D8; --md-on-primary-container:#002118;
+  --md-secondary-container:#CDE9DD; --md-on-secondary-container:#072018;
+  --md-tertiary-container:#CCE5FF; --md-on-tertiary-container:#001E31;
+  --md-error:#BA1A1A; --md-error-container:#FFDAD6;
+  --md-surface:#F5FBF7; --md-surface-dim:#D5DBD7;
+  --md-surface-lowest:#FFFFFF; --md-surface-low:#EFF5F1; --md-surface-container:#E9EFEB;
+  --md-surface-high:#E4EAE5; --md-surface-highest:#DEE4E0;
+  --md-on-surface:#171D1A; --md-on-surface-variant:#3F4945;
+  --md-outline:#6F7975; --md-outline-variant:#BFC9C3;
+  --md-inverse-surface:#2C322F; --md-inverse-on-surface:#ECF2EE; --md-inverse-primary:#80D8BD;
+  --md-scrim:rgba(0,0,0,.32);
+  --md-e1:0 1px 2px rgba(0,0,0,.3),0 1px 3px 1px rgba(0,0,0,.15);
+  --md-e2:0 1px 2px rgba(0,0,0,.3),0 2px 6px 2px rgba(0,0,0,.15);
+  --md-e3:0 1px 3px rgba(0,0,0,.3),0 4px 8px 3px rgba(0,0,0,.15);
+  --md-ease:cubic-bezier(.2,0,0,1);
+  --md-navH:80px; --md-railW:80px;
+
+  /* 既存の配色トークンを M3 の色に置き換える (キャンバスの描画色もここから読む) */
+  --bg:#E9EFEB; --surface:#F5FBF7; --surface2:#EFF5F1; --surface3:#E4EAE5;
+  --ink:#171D1A; --ink2:#3F4945; --muted:#3F4945; --faint:#6F7975;
+  --line:#D5DFD9; --line2:#BFC9C3;
+  --accent:#006B56; --accent-ink:#FFFFFF; --accent-soft:#CDE9DD;
+  --ok:#006B56; --crit:#BA1A1A;
+  --grid:#CDD8D2; --gridmaj:#B3C0B9;
+  --shadow:var(--md-e1); --shadow-lg:var(--md-e3);
+  --ui:"Roboto","Google Sans","Noto Sans JP","Noto Sans CJK JP","Hiragino Sans",system-ui,sans-serif;
+  --mono:"Roboto Mono","IBM Plex Mono","Droid Sans Mono",ui-monospace,monospace;
+  --r-sm:8px; --r-md:12px; --r-lg:16px; --barH:64px;
+}
+@media (prefers-color-scheme:dark){ html.md:not([data-theme="light"]){
+  --md-primary:#80D8BD; --md-on-primary:#00382B;
+  --md-primary-container:#005140; --md-on-primary-container:#9CF4D8;
+  --md-secondary-container:#334B42; --md-on-secondary-container:#CDE9DD;
+  --md-tertiary-container:#2D4960; --md-on-tertiary-container:#CCE5FF;
+  --md-error:#FFB4AB; --md-error-container:#93000A;
+  --md-surface:#0F1512; --md-surface-dim:#0F1512;
+  --md-surface-lowest:#0A0F0D; --md-surface-low:#171D1A; --md-surface-container:#1B211E;
+  --md-surface-high:#252B28; --md-surface-highest:#303633;
+  --md-on-surface:#DEE4E0; --md-on-surface-variant:#BFC9C3;
+  --md-outline:#89938E; --md-outline-variant:#3F4945;
+  --md-inverse-surface:#DEE4E0; --md-inverse-on-surface:#2C322F; --md-inverse-primary:#006B56;
+  --bg:#0A0F0D; --surface:#0F1512; --surface2:#171D1A; --surface3:#252B28;
+  --ink:#DEE4E0; --ink2:#BFC9C3; --muted:#BFC9C3; --faint:#89938E;
+  --line:#2A322E; --line2:#3F4945;
+  --accent:#80D8BD; --accent-ink:#00382B; --accent-soft:#334B42;
+  --ok:#80D8BD; --crit:#FFB4AB;
+  --grid:#1C2420; --gridmaj:#27302C;
+}}
+html.md[data-theme="dark"]{
+  --md-primary:#80D8BD; --md-on-primary:#00382B;
+  --md-primary-container:#005140; --md-on-primary-container:#9CF4D8;
+  --md-secondary-container:#334B42; --md-on-secondary-container:#CDE9DD;
+  --md-tertiary-container:#2D4960; --md-on-tertiary-container:#CCE5FF;
+  --md-error:#FFB4AB; --md-error-container:#93000A;
+  --md-surface:#0F1512; --md-surface-dim:#0F1512;
+  --md-surface-lowest:#0A0F0D; --md-surface-low:#171D1A; --md-surface-container:#1B211E;
+  --md-surface-high:#252B28; --md-surface-highest:#303633;
+  --md-on-surface:#DEE4E0; --md-on-surface-variant:#BFC9C3;
+  --md-outline:#89938E; --md-outline-variant:#3F4945;
+  --md-inverse-surface:#DEE4E0; --md-inverse-on-surface:#2C322F; --md-inverse-primary:#006B56;
+  --bg:#0A0F0D; --surface:#0F1512; --surface2:#171D1A; --surface3:#252B28;
+  --ink:#DEE4E0; --ink2:#BFC9C3; --muted:#BFC9C3; --faint:#89938E;
+  --line:#2A322E; --line2:#3F4945;
+  --accent:#80D8BD; --accent-ink:#00382B; --accent-soft:#334B42;
+  --ok:#80D8BD; --crit:#FFB4AB;
+  --grid:#1C2420; --gridmaj:#27302C;
+}
+html.md body{font-family:var(--ui);background:var(--md-surface);color:var(--md-on-surface);-webkit-tap-highlight-color:transparent;font-feature-settings:normal}
+html.md :focus-visible{outline:2px solid var(--md-primary);outline-offset:2px}
+
+/* ---------- 画面の骨組み: 上のアプリバー / 下のナビゲーションバー (幅 600px 以上は左のレール) ---------- */
+html.md .app{width:auto;max-width:none;bottom:calc(var(--md-navH) + env(safe-area-inset-bottom,0px))}
+.md-nav{display:none}
+html.md .md-nav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:space-around;align-items:stretch;
+  height:calc(var(--md-navH) + env(safe-area-inset-bottom,0px));padding:0 4px env(safe-area-inset-bottom,0px);background:var(--md-surface-container)}
+.md-nav-it{flex:1 1 0;min-width:0;border:0;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  padding:12px 0 16px;color:var(--md-on-surface-variant);font:inherit}
+.md-ind{position:relative;display:flex;align-items:center;justify-content:center;width:64px;height:32px;border-radius:16px;overflow:hidden;transition:background .2s var(--md-ease)}
+.md-ind svg{width:24px;height:24px;position:relative}
+.md-lbl{font-size:12px;line-height:16px;font-weight:500;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.md-nav-it:hover .md-ind{background:color-mix(in srgb,var(--md-on-surface) 8%,transparent)}
+.md-nav-it[aria-selected="true"]{color:var(--md-on-surface)}
+.md-nav-it[aria-selected="true"] .md-ind{background:var(--md-secondary-container);color:var(--md-on-secondary-container)}
+.md-nav-it[aria-selected="true"] .md-lbl{font-weight:700;color:var(--md-on-surface)}
+@media (min-width:600px){
+  html.md .app{bottom:0;left:var(--md-railW)}
+  html.md .md-nav{top:0;right:auto;width:var(--md-railW);height:auto;flex-direction:column;justify-content:flex-start;gap:12px;padding:88px 0 12px;background:var(--md-surface)}
+  html.md .md-nav-it{flex:0 0 auto;padding:0}
+  html.md .md-rail-logo{display:flex}
+}
+.md-rail-logo{display:none;position:absolute;top:16px;left:0;right:0;justify-content:center}
+.md-rail-logo svg{width:40px;height:40px}
+
+/* アプリバー */
+html.md .bar{min-height:64px;padding:8px 4px;gap:0 2px;row-gap:0;flex-wrap:wrap;align-items:center;background:var(--md-surface);border:0;box-shadow:none}
+html.md .bar > .brand,html.md .bar > .tabs,html.md .bar > .sep,html.md .bar > .spacer,
+html.md #bImport,html.md #bExport,html.md #bTheme,html.md #bInsp,html.md #bPal2,html.md #bSample,html.md #bAll,html.md #bRunQ{display:none!important}
+.md-title{display:none}
+html.md .md-title{display:block;flex:1 1 0;min-width:0;padding:0 8px;font-size:22px;line-height:28px;font-weight:400;color:var(--md-on-surface);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html.md .md-title small{display:block;font-size:12px;line-height:16px;color:var(--md-on-surface-variant);letter-spacing:.03em}
+html.md .md-navbtn[hidden]+.md-title{padding-left:12px}
+html.md .bar > .btn{order:2;width:48px;height:48px;min-height:48px;padding:0;border:0;border-radius:24px;background:transparent;justify-content:center;color:var(--md-on-surface-variant);flex:0 0 auto}
+html.md .bar > .btn span,html.md .bar > .btn kbd{display:none}
+html.md .bar > .btn svg{width:24px;height:24px}
+html.md .bar > .md-navbtn{order:0}
+html.md .bar > .md-title{order:1}
+html.md .bar > .md-more{order:3}
+html.md .bar > .btn[aria-pressed="true"]{background:var(--md-secondary-container);color:var(--md-on-secondary-container)}
+/* 2 段目: ツールバー */
+html.md .bar .tools{order:9;flex:1 0 100%;flex-wrap:wrap;gap:4px 8px;padding:4px 4px 0;margin:0;border:0;overflow:visible;align-items:center}
+html.md .bar.wrap .tools{flex-wrap:wrap}
+@media (min-width:1000px){ html.md .bar .tools{order:1;flex:0 1 auto;padding:0 8px} html.md .md-title{flex:0 1 auto} html.md .bar::after{content:"";order:1;flex:1 1 0} }
+html.md .toolgroup{background:transparent;border:0;padding:0;gap:2px;border-radius:0}
+html.md .toolgroup + .toolgroup{padding-left:8px;border-left:1px solid var(--md-outline-variant)}
+html.md .tools .toolgroup .btn{height:40px;min-height:40px;min-width:40px;padding:0 8px;border:0;border-radius:20px;background:transparent;color:var(--md-on-surface-variant);justify-content:center;transition:background .2s var(--md-ease),border-radius .25s var(--md-ease),color .2s}
+html.md .tools .toolgroup .btn svg{width:22px;height:22px}
+html.md .tools .toolgroup .btn[aria-pressed="true"]{background:var(--md-secondary-container);color:var(--md-on-secondary-container);border-radius:12px;box-shadow:none}
+html.md .simgroup #bRunQ{color:var(--md-primary)}
+@media (max-width:999px){ html.md .tools .toolgroup .btn span{display:none} }
+@media (max-width:380px){ html.md .tools .toolgroup .btn{min-width:34px;height:36px;min-height:36px;padding:0 5px} html.md .tools .toolgroup + .toolgroup{padding-left:0;border-left:0} html.md .bar .tools{gap:4px 6px} }
+html.md .px-bar .toolgroup + .toolgroup{padding-left:0;border-left:0}
+
+/* 分割ボタン (部品面 / 半田面 / 両面) */
+html.md #viewTabs{display:flex;background:transparent;border:1px solid var(--md-outline);border-radius:20px;padding:0;gap:0;overflow:hidden}
+html.md #viewTabs button{height:38px;padding:0 14px;border-radius:0;font-size:14px;font-weight:500;color:var(--md-on-surface);background:transparent;box-shadow:none;position:relative}
+html.md #viewTabs button + button{border-left:1px solid var(--md-outline)}
+html.md #viewTabs button[aria-selected="true"]{background:var(--md-secondary-container);color:var(--md-on-secondary-container)}
+html.md #viewTabs button[aria-selected="true"]::before{content:"✓ ";font-weight:700}
+@media (max-width:420px){ html.md #viewTabs button{padding:0 9px;font-size:13px} html.md #viewTabs button[aria-selected="true"]::before{content:""} }
+
+/* ---------- ボタン (M3: 塗り / 枠線 / トーン / テキスト) ---------- */
+html.md .btn{min-height:40px;padding:0 16px;border-radius:20px;border:1px solid var(--md-outline);background:transparent;color:var(--md-primary);
+  font-size:14px;font-weight:500;letter-spacing:.01em;gap:8px;line-height:20px;box-shadow:none;transition:background .2s var(--md-ease),color .2s,border-radius .25s var(--md-ease),box-shadow .2s}
+html.md .btn:hover{background:color-mix(in srgb,var(--md-primary) 8%,transparent);border-color:var(--md-outline)}
+html.md .btn:active{transform:none}
+html.md .btn.primary{background:var(--md-primary);color:var(--md-on-primary);border-color:transparent}
+html.md .btn.primary:hover{box-shadow:var(--md-e1);filter:none;background:color-mix(in srgb,var(--md-on-primary) 8%,var(--md-primary))}
+html.md .btn[aria-pressed="true"]{background:var(--md-secondary-container);color:var(--md-on-secondary-container);border-color:transparent}
+html.md .btn.icon{min-width:40px;padding:0 10px;font-family:var(--ui)}
+html.md .btn.ghost{border-color:transparent;color:var(--md-primary)}
+html.md .btn.danger{color:var(--md-error);border-color:var(--md-outline)}
+html.md .btn.dl{background:var(--md-secondary-container);color:var(--md-on-secondary-container);border-color:transparent}
+html.md .btn:disabled{opacity:.38}
+html.md .pclose{width:40px;height:40px;border:0;border-radius:20px;background:transparent;color:var(--md-on-surface-variant);font-size:22px}
+html.md .pclose:hover{background:color-mix(in srgb,var(--md-on-surface) 8%,transparent);color:var(--md-on-surface)}
+
+/* 波紋 (リップル) */
+.md-rh{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none;z-index:0}
+.md-rp{position:absolute;border-radius:50%;background:currentColor;opacity:.14;transform:scale(0);animation:md-rp .5s var(--md-ease) forwards}
+@keyframes md-rp{60%{opacity:.14}to{transform:scale(1);opacity:0}}
+@media (prefers-reduced-motion:reduce){.md-rp{display:none}}
+
+/* ---------- FAB (シミュレーション実行) ---------- */
+.md-fab{display:none}
+html.md body[data-mdtab="sch"] .md-fab{display:flex}
+html.md .md-fab{position:absolute;right:16px;bottom:16px;z-index:6;width:56px;height:56px;border:0;border-radius:16px;cursor:pointer;align-items:center;justify-content:center;gap:10px;
+  background:var(--md-primary-container);color:var(--md-on-primary-container);box-shadow:var(--md-e3);transition:box-shadow .2s,transform .2s var(--md-ease),border-radius .2s}
+html.md .md-fab svg{width:24px;height:24px;position:relative}
+html.md .md-fab span{display:none;font-size:14px;font-weight:500;position:relative}
+html.md .md-fab:hover{box-shadow:var(--md-e3),0 0 0 100px color-mix(in srgb,var(--md-on-primary-container) 8%,transparent) inset}
+html.md .md-fab:active{transform:scale(.94)}
+html.md .md-fab.busy{border-radius:28px}
+html.md .md-fab.busy svg{animation:md-spin 1s linear infinite}
+@keyframes md-spin{to{transform:rotate(360deg)}}
+@media (min-width:600px){ html.md .md-fab{width:auto;padding:0 20px 0 16px} html.md .md-fab span{display:inline} }
+html.md .stage.docked .md-fab{display:none!important}
+
+/* ---------- キャンバスの上の部品 ---------- */
+html.md .zoombox{flex-direction:column;gap:8px;top:12px!important;right:12px!important}
+html.md .zoombox .btn{width:44px;height:40px;min-height:40px;padding:0;justify-content:center;border:0;border-radius:12px;background:var(--md-surface-high);color:var(--md-on-surface-variant);box-shadow:var(--md-e1);font-size:13px}
+html.md .zoombox #zOut,html.md .zoombox #zIn{font-size:20px}
+html.md .hint{border-radius:12px;border:0;background:color-mix(in srgb,var(--md-surface-high) 94%,transparent);box-shadow:var(--md-e1);color:var(--md-on-surface-variant);max-width:calc(100% - 88px);font-size:13px;padding:8px 12px}
+html.md .monotoggle{min-height:32px;border-radius:8px;border:1px solid var(--md-outline-variant);background:var(--md-surface-low);color:var(--md-on-surface-variant);box-shadow:none;padding:0 12px}
+html.md .actbar{left:12px!important;transform:none!important;max-width:calc(100% - 96px)!important;justify-content:flex-start;border:0;border-radius:16px;background:var(--md-surface-high);box-shadow:var(--md-e2);padding:8px;gap:6px}
+html.md body:not([data-mdtab="sch"]) .actbar,html.md .stage.docked .actbar{max-width:calc(100% - 24px)!important}
+html.md .actbar b{font-size:13px;color:var(--md-on-surface-variant)}
+html.md .actbar .btn{min-height:36px;padding:0 12px}
+html.md .popover{border:0;border-radius:28px;background:var(--md-surface-high);box-shadow:var(--md-e3);padding:16px 18px 18px;bottom:88px;width:min(360px,calc(100% - 32px))}
+html.md .pophead b{font-size:16px;font-weight:500}
+html.md .pophead .btn{min-height:32px;padding:0 10px}
+html.md .popinput{border:1px solid var(--md-outline);border-radius:4px;background:transparent;padding:12px 14px;font-size:16px}
+html.md .popinput:focus{outline:0;border-color:var(--md-primary);box-shadow:inset 0 0 0 1px var(--md-primary)}
+html.md .chip{border-radius:8px}
+
+/* ---------- 部品リスト = ナビゲーションドロワー ---------- */
+html.md .palette{background:var(--md-surface-low);border-right:0}
+html.md .phead{padding:12px 8px 8px 20px;border-bottom:0}
+html.md .phead b{font-size:14px;letter-spacing:.01em;text-transform:none;color:var(--md-on-surface-variant);font-weight:500}
+html.md .pcount{background:var(--md-secondary-container);color:var(--md-on-secondary-container);font-family:var(--ui);font-size:11px;padding:2px 8px}
+html.md .libsearch{border-bottom:0;padding:4px 12px 8px;gap:10px}
+html.md .ls-in{height:48px;border:0;border-radius:24px;background:var(--md-surface-highest);padding:0 16px;gap:12px}
+html.md .ls-in:focus-within{box-shadow:inset 0 0 0 2px var(--md-primary)}
+html.md .ls-in svg{width:20px;height:20px;color:var(--md-on-surface-variant)}
+html.md .ls-in input{font-size:15px}
+html.md .ls-cats{gap:6px}
+html.md .lc{height:32px;padding:0 12px;border-radius:8px;border:1px solid var(--md-outline-variant);background:transparent;color:var(--md-on-surface-variant);font-size:13px;font-weight:500;position:relative}
+html.md .lc[aria-pressed="true"]{background:var(--md-secondary-container);color:var(--md-on-secondary-container);border-color:transparent}
+html.md .lc[aria-pressed="true"]::before{content:"✓ "}
+html.md .ls-list{border:0;border-radius:16px;background:var(--md-surface-lowest)}
+html.md .lr{border-bottom:0;padding:0 14px;gap:12px}
+html.md .lr[aria-pressed="true"]{background:var(--md-secondary-container);box-shadow:none;color:var(--md-on-secondary-container)}
+html.md .lt b{font-size:13.5px}
+html.md .lt em{font-size:11.5px;color:var(--md-on-surface-variant)}
+html.md .lh{font-size:11px;letter-spacing:.06em;color:var(--md-on-surface-variant);font-weight:500;text-transform:none;padding:4px 14px}
+html.md .pbody{padding:8px 12px 40px}
+html.md .pgroup h4{font-size:12px;letter-spacing:.03em;text-transform:none;color:var(--md-on-surface-variant);font-weight:500;padding:8px 4px 6px}
+html.md .pitem{border:0;border-radius:12px;background:var(--md-surface-lowest);box-shadow:none}
+html.md .pitem[aria-pressed="true"],html.md .pitem.on{background:var(--md-secondary-container)}
+html.md .scrim{background:var(--md-scrim);backdrop-filter:none}
+@media (max-width:640px){
+  html.md .palette{position:absolute;left:0;top:0;bottom:0;z-index:8;width:min(320px,86vw);border-radius:0 16px 16px 0;box-shadow:var(--md-e1);
+    animation:md-drawer .3s var(--md-ease)}
+  html.md .palette[hidden]{display:none!important}
+}
+@keyframes md-drawer{from{transform:translateX(-100%)}to{transform:none}}
+
+/* ---------- 情報パネル: スマホでは下から出るボトムシート ---------- */
+html.md .inspector{background:var(--md-surface-low);border-left:0}
+html.md .itabs{border-bottom:1px solid var(--md-outline-variant);gap:0}
+html.md .itabs button,html.md .dk-tabs button{position:relative;min-height:48px;padding:0 14px;font-size:14px;font-weight:500;color:var(--md-on-surface-variant);border-bottom:0;background:transparent}
+html.md .itabs button[aria-selected="true"],html.md .dk-tabs button[aria-selected="true"]{color:var(--md-primary)}
+html.md .itabs button[aria-selected="true"]::after,html.md .dk-tabs button[aria-selected="true"]::after{content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:min(70%,56px);height:3px;border-radius:3px 3px 0 0;background:var(--md-primary)}
+html.md .itabs .pclose{min-height:40px}
+html.md .ipane{padding:12px 16px}
+html.md .field label{font-size:12px;letter-spacing:.02em;text-transform:none;color:var(--md-on-surface-variant);font-weight:500}
+html.md .field input,html.md .field select,html.md .field textarea,html.md .calc-f input,html.md .calc-f select,html.md .dk-f input,html.md .dk-f select,html.md textarea.code{
+  border:1px solid var(--md-outline);border-radius:4px;background:transparent;color:var(--md-on-surface)}
+html.md .field input,html.md .field select,html.md .calc-f input,html.md .calc-f select{min-height:48px;padding:10px 14px;font-size:15px}
+html.md .field input[type=range]{min-height:0;border:0;accent-color:var(--md-primary)}
+html.md .field input:focus,html.md .field select:focus,html.md .field textarea:focus,html.md .calc-f input:focus,html.md .calc-f select:focus,html.md .dk-f input:focus,html.md .dk-f select:focus,html.md textarea.code:focus{
+  outline:0;border-color:var(--md-primary);box-shadow:inset 0 0 0 1px var(--md-primary)}
+html.md input[type=checkbox],html.md input[type=radio],html.md input[type=range]{accent-color:var(--md-primary)}
+html.md .kv{border-bottom:1px solid var(--md-outline-variant);padding:8px 0;font-size:13px}
+html.md .netrow{border-radius:12px;padding:10px 12px;border:0;margin-bottom:4px}
+html.md .netrow[aria-selected="true"]{background:var(--md-secondary-container);color:var(--md-on-secondary-container)}
+.md-handle{display:none}
+@media (max-width:640px){
+  html.md .inspector{position:absolute;left:0;right:0;top:auto;bottom:0;width:auto;height:min(68%,560px);z-index:8;border-radius:28px 28px 0 0;
+    box-shadow:var(--md-e1);padding-top:22px;animation:md-up .32s var(--md-ease)}
+  html.md .inspector .md-handle,html.md .sheet .md-handle{display:block}
+}
+.md-handle{position:absolute;left:0;right:0;top:0;height:22px;cursor:grab;touch-action:none;z-index:2}
+.md-handle::after{content:"";position:absolute;left:50%;top:10px;width:32px;height:4px;margin-left:-16px;border-radius:2px;background:var(--md-on-surface-variant);opacity:.4}
+@keyframes md-up{from{transform:translateY(100%)}to{transform:none}}
+
+/* ---------- ダイアログ: スマホでは下からのシート ---------- */
+html.md .modal{background:var(--md-scrim)}
+html.md .sheet{position:relative;border:0;border-radius:28px;background:var(--md-surface-high);box-shadow:var(--md-e3)}
+html.md .sheet header{border-bottom:0;padding:20px 16px 8px 24px}
+html.md .sheet header h3{font-size:22px;line-height:28px;font-weight:400;color:var(--md-on-surface)}
+html.md .sheet .content{padding:8px 24px 16px}
+html.md .sheet footer{border-top:0;padding:8px 24px 20px}
+html.md #modalClose{border-color:transparent}
+html.md .scard{border:0;border-radius:12px;background:var(--md-surface-low);padding:14px 16px}
+html.md .scard:hover{background:var(--md-secondary-container);color:var(--md-on-secondary-container)}
+html.md .scard b{font-size:15px;font-weight:500}
+html.md .scard span{font-size:13px;color:var(--md-on-surface-variant)}
+@media (max-width:640px){
+  html.md .modal{align-items:flex-end;padding:0}
+  html.md .sheet,html.md .sheet.wide{width:100%;max-width:none;max-height:92%;border-radius:28px 28px 0 0;padding-top:14px;animation:md-up .32s var(--md-ease);
+    padding-bottom:env(safe-area-inset-bottom,0px)}
+}
+html.md .calc-nav{background:transparent;border-color:var(--md-outline-variant)}
+html.md .calc-nav button{border-radius:20px;padding:10px 16px;font-size:14px;font-weight:500;color:var(--md-on-surface-variant)}
+html.md .calc-nav button[aria-current="true"]{background:var(--md-secondary-container);color:var(--md-on-secondary-container)}
+html.md .calc-out{border-left:0;border-radius:16px;background:var(--md-primary-container);color:var(--md-on-primary-container);padding:10px 14px}
+html.md .calc-r span{color:inherit;opacity:.8}
+html.md .calc-r.big b{color:inherit}
+html.md .calc-f{font-size:12px}
+
+/* ---------- 検索 (コマンドパレット) ---------- */
+html.md .cmdk{background:var(--md-scrim);backdrop-filter:none;padding:12px}
+html.md .cmdk-box{border:0;border-radius:28px;background:var(--md-surface-high);box-shadow:var(--md-e3)}
+html.md .cmdk-box input{height:56px;padding:0 24px;font-size:16px;border-bottom:1px solid var(--md-outline-variant)}
+html.md .cmdk-it{min-height:48px;border-radius:0;padding:0 16px;font-size:15px;gap:16px}
+html.md .cmdk-it.on,html.md .cmdk-it:hover{background:color-mix(in srgb,var(--md-on-surface) 10%,transparent)}
+html.md .cmdk-foot{display:none}
+@media (max-width:640px){
+  html.md .cmdk{padding:0}
+  html.md .cmdk-box{width:100%;height:100%;max-height:100%;border-radius:0;background:var(--md-surface-high)}
+  html.md .cmdk-box input{height:72px;font-size:17px}
+}
+
+/* ---------- スナックバー ---------- */
+html.md .toasts{top:auto!important;bottom:calc(var(--md-navH) + 28px + 88px + env(safe-area-inset-bottom,0px));left:16px;right:16px;width:auto;transform:none;align-items:stretch;gap:8px}
+@media (min-width:600px){ html.md .toasts{left:calc(var(--md-railW) + 24px);right:auto;bottom:52px;width:min(560px,calc(100% - var(--md-railW) - 48px))} }
+html.md .toast,html.md .toast.ok,html.md .toast.err{background:var(--md-inverse-surface);color:var(--md-inverse-on-surface);border-radius:4px;padding:14px 16px;font-size:14px;line-height:20px;box-shadow:var(--md-e3);
+  display:flex;gap:12px;align-items:flex-start;animation:md-snack .25s var(--md-ease)}
+html.md .toast.ok::before{content:"✓";color:var(--md-inverse-primary);font-weight:700}
+html.md .toast.err::before{content:"!";width:18px;height:18px;flex:0 0 18px;border-radius:50%;background:#FFB4AB;color:#690005;font-weight:700;font-size:13px;line-height:18px;text-align:center;margin-top:1px}
+html.md .toast.out{transform:translateY(8px)}
+@keyframes md-snack{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ---------- ステータス行 ---------- */
+html.md .status{height:28px;background:var(--md-surface-container);border-top:0;color:var(--md-on-surface-variant);font-family:var(--ui);font-size:12px;padding:0 16px}
+html.md .status .s{border-right-color:var(--md-outline-variant)}
+html.md .status .s b{font-family:var(--mono)}
+@media (max-width:599px){ html.md .status{background:var(--md-surface-container)} }
+
+/* ---------- シミュレーション ドック = ボトムシート ---------- */
+html.md .simdock{border-top:0;border-radius:28px 28px 0 0;background:var(--md-surface-low);box-shadow:var(--md-e2)}
+html.md .dk-grip{top:0;height:22px}
+html.md .dk-grip::after{top:10px;width:32px;height:4px;margin-left:-16px;border-radius:2px;background:var(--md-on-surface-variant);opacity:.4}
+html.md .dk-head{padding-top:22px;border-bottom-color:var(--md-outline-variant)}
+html.md #dkClose{top:24px}
+html.md .dk-types{background:transparent;border:1px solid var(--md-outline);border-radius:20px;padding:0;gap:0;overflow:hidden}
+html.md .dk-types button{height:38px;padding:0 12px;border-radius:0;font-size:13.5px;font-weight:500;color:var(--md-on-surface);box-shadow:none}
+html.md .dk-types button + button{border-left:1px solid var(--md-outline)}
+html.md .dk-types button[aria-selected="true"]{background:var(--md-secondary-container);color:var(--md-on-secondary-container);box-shadow:none}
+html.md .dk-f{font-size:12.5px;color:var(--md-on-surface-variant)}
+html.md .dk-f input,html.md .dk-f select{min-height:36px;padding:4px 10px;font-size:13.5px}
+html.md .wv-chip{border-radius:8px;border-color:var(--md-outline-variant);background:transparent;min-height:32px;padding:2px 6px 2px 10px}
+html.md .wv-add{border-radius:8px;min-height:32px}
+html.md .wv-tool{border-radius:8px;min-height:32px;border-color:var(--md-outline-variant);background:transparent}
+html.md .wv-tool.on{background:var(--md-secondary-container);color:var(--md-on-secondary-container);border-color:transparent}
+html.md .wv-plot{border:0;border-radius:16px}
+html.md .wv-time .btn{min-height:32px;padding:0 12px}
+html.md #dkRun{padding:0 20px}
+
+/* ---------- PCB 画面 ---------- */
+html.md .px-bar{background:var(--md-surface);border-bottom:0;padding:4px 8px 8px;gap:6px 8px}
+html.md .px-bar .toolgroup{gap:2px}
+html.md .px-bar .toolgroup .btn{border:0;min-height:40px;padding:0 12px;color:var(--md-on-surface-variant)}
+html.md .px-bar .toolgroup .btn.primary{color:var(--md-on-primary)}
+html.md .px-bar .toolgroup .btn[aria-pressed="true"]{color:var(--md-on-secondary-container);border-radius:12px}
+html.md .px-bar .btn.lyF{border:1px solid #d9534f;color:#d9534f}
+html.md .px-bar .btn.lyB{border:1px solid #3c8ce7;color:#3c8ce7}
+html.md .px-side{background:var(--md-surface-low);border-left:0}
+@media (max-width:900px){ html.md .px-side{border-top:0;border-radius:28px 28px 0 0;box-shadow:var(--md-e1);padding-top:8px} }
+@media (max-width:560px){ html.md .px-bar .btn,html.md .px-bar .toolgroup .btn{min-height:36px;padding:0 8px;font-size:13px} html.md .dk-types button{padding:0 8px;font-size:13px} }
+
+/* ---------- メニュー (︙) ---------- */
+.md-menu{position:fixed;z-index:70;min-width:216px;max-width:min(300px,calc(100vw - 16px));padding:8px 0;border-radius:12px;background:var(--md-surface-container);box-shadow:var(--md-e2);
+  max-height:calc(100vh - 80px);overflow-y:auto;transform-origin:top right;animation:md-menu .18s var(--md-ease)}
+@keyframes md-menu{from{opacity:0;transform:scale(.9,.6)}to{opacity:1;transform:none}}
+.md-menu button{display:flex;align-items:center;gap:12px;width:100%;min-height:48px;padding:0 16px 0 12px;border:0;background:transparent;color:var(--md-on-surface);font:inherit;font-size:14px;text-align:left;cursor:pointer;position:relative}
+.md-menu button:hover{background:color-mix(in srgb,var(--md-on-surface) 8%,transparent)}
+.md-menu button svg{width:24px;height:24px;flex:0 0 24px;color:var(--md-on-surface-variant)}
+.md-menu button span{flex:1}
+.md-menu button em{font-style:normal;font-size:12px;color:var(--md-on-surface-variant)}
+.md-menu hr{border:0;border-top:1px solid var(--md-outline-variant);margin:8px 0}
+.md-rail-logo .lg-bg{fill:var(--md-primary)}
+.md-rail-logo .lg-dot{fill:var(--md-on-primary);opacity:.45}
+.md-rail-logo .lg-wave{fill:none;stroke:var(--md-on-primary);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+/* 操作バーが出ている間は FAB をアイコンだけに縮める (M3 の拡張 FAB の折りたたみ) */
+html.md .stage:has(.actbar:not([hidden])) .md-fab{width:56px;padding:0}
+html.md .stage:has(.actbar:not([hidden])) .md-fab span{display:none}

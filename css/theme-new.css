@@ -1,0 +1,330 @@
+/* =====================================================================
+   UniBoard SPICE — 新しい見た目
+   配色: 計測器パネルのグレー + はんだレジストの緑 (アクセント)
+   ===================================================================== */
+:root{
+  --bg:#ECEFF2; --surface:#FFFFFF; --surface2:#F4F6F8; --surface3:#E4E9ED;
+  --ink:#0F1820; --ink2:#2E3A45; --muted:#586673; --faint:#86929E;
+  --line:#D5DCE2; --line2:#C1CAD2;
+  --accent:#0A7A62; --accent-ink:#FFFFFF; --accent-soft:#DBF0E9;
+  --grid:#CBD4DB; --gridmaj:#B1BEC8;
+  --scope:#0E1419; --scope-grid:#1E2A31;
+  --shadow:0 1px 2px rgba(15,24,32,.06),0 8px 24px rgba(15,24,32,.07);
+  --shadow-lg:0 18px 50px rgba(10,20,26,.22);
+  --ui:"IBM Plex Sans JP","Archivo","Hiragino Sans","Noto Sans JP","Yu Gothic",Meiryo,system-ui,sans-serif;
+  --r-sm:6px; --r-md:9px; --r-lg:14px;
+  --barH:52px;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#0A0F13; --surface:#11181D; --surface2:#162027; --surface3:#1D2830;
+  --ink:#E3EAEF; --ink2:#BAC6CF; --muted:#8495A1; --faint:#61707B;
+  --line:#212E36; --line2:#2C3B45;
+  --accent:#39CFA4; --accent-ink:#03140F; --accent-soft:#0D2A22;
+  --grid:#1A262D; --gridmaj:#26343D;
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 8px 24px rgba(0,0,0,.3);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0A0F13; --surface:#11181D; --surface2:#162027; --surface3:#1D2830;
+  --ink:#E3EAEF; --ink2:#BAC6CF; --muted:#8495A1; --faint:#61707B;
+  --line:#212E36; --line2:#2C3B45;
+  --accent:#39CFA4; --accent-ink:#03140F; --accent-soft:#0D2A22;
+  --grid:#1A262D; --gridmaj:#26343D;
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 8px 24px rgba(0,0,0,.3);
+  color-scheme:dark;
+}
+body{font-family:var(--ui);background:var(--bg);font-feature-settings:"palt" 1}
+kbd{font-family:var(--mono);font-size:10px;padding:1px 5px;border-radius:4px;border:1px solid var(--line2);background:var(--surface2);color:var(--muted);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- トップバー ---------- */
+.bar{height:auto;min-height:var(--barH);gap:12px;padding:0 14px;box-shadow:0 1px 0 var(--line)}
+/* ツールが 1 行に収まらないときは 2 段目へ折り返す (隠れて押せないボタンを作らない) */
+.bar.wrap{flex-wrap:wrap;row-gap:6px;padding-block:6px}
+.bar.wrap .sep{display:none}
+.bar.wrap .tools{order:9;flex:1 0 100%;flex-wrap:wrap;overflow-x:visible}
+.brand{align-items:center;gap:9px}
+.brand .logo{width:26px;height:26px;flex:0 0 auto}
+.brand .lg-bg{fill:var(--accent)}
+.brand .lg-dot{fill:var(--accent-ink);opacity:.45}
+.brand .lg-wave{fill:none;stroke:var(--accent-ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.brand b{font-family:"Archivo",var(--ui);font-size:15px;letter-spacing:-.01em}
+.bar > .tabs{padding:3px;border-radius:10px;background:var(--surface3);border-color:transparent}
+.bar > .tabs button{padding:6px 14px;font-size:12.5px;border-radius:7px;color:var(--muted);transition:background .14s,color .14s}
+.bar > .tabs button:hover{color:var(--ink)}
+.bar > .tabs button[aria-selected="true"]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.toolgroup{border-radius:10px;background:var(--surface2)}
+.toolgroup .btn{border-radius:8px}
+.simgroup{border-color:color-mix(in srgb,var(--accent) 35%,var(--line))}
+.simgroup #bRunQ{color:var(--accent)}
+.btn{border-radius:8px;transition:background .13s,border-color .13s,color .13s,transform .1s,box-shadow .13s}
+.btn.primary{box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.cmdbtn{color:var(--muted);min-width:0}
+.cmdbtn kbd{margin-left:2px}
+.bar .btn.dl{border-color:var(--accent);color:var(--accent)}
+
+/* ---------- パレット + 部品ライブラリ ---------- */
+.palette{flex-basis:268px;width:268px}
+.phead{gap:6px}
+.pcount{font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:99px}
+.libsearch{flex:0 0 auto;padding:8px 8px 6px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:7px}
+.ls-in{display:flex;align-items:center;gap:6px;border:1px solid var(--line2);background:var(--surface2);border-radius:9px;padding:0 9px;transition:border-color .13s,box-shadow .13s}
+.ls-in:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+.ls-in svg{width:15px;height:15px;color:var(--faint);flex:0 0 auto}
+.ls-in input{border:0;background:transparent;outline:0;padding:8px 0;font-size:12.5px;width:100%;min-width:0}
+.ls-cats{display:flex;gap:4px;flex-wrap:wrap}
+.ls-cats::-webkit-scrollbar{display:none}
+.lc{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:99px;padding:3px 9px;font-size:11px;cursor:pointer;white-space:nowrap}
+.lc:hover{color:var(--ink);border-color:var(--line2)}
+.lc[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.ls-list{position:relative;overflow-y:auto;max-height:46vh;min-height:60px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}
+.palette.searching .ls-list{max-height:none;flex:1 1 auto}
+.palette.searching{}
+.palette.searching .pbody{display:none}
+.palette.searching .libsearch{flex:1 1 auto;min-height:0}
+.ls-list.recent{max-height:170px}
+.ls-spacer{width:1px}
+.lr{position:absolute;left:0;right:0;height:40px;display:flex;align-items:center;gap:8px;padding:0 8px;border:0;border-bottom:1px solid var(--line);background:transparent;cursor:pointer;text-align:left;color:var(--ink)}
+.lr:hover{background:var(--surface2)}
+.lr[aria-pressed="true"]{background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.lr img{width:36px;height:22px;flex:0 0 auto}
+.lt{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.lt b{font-size:11.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lt em{font-style:normal;font-size:10px;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lh{position:absolute;left:0;right:0;height:22px;padding:3px 9px;font-size:9.5px;letter-spacing:.1em;color:var(--faint);font-weight:700;text-transform:uppercase}
+.pgroup h4.fold{cursor:pointer;display:flex;align-items:center;gap:5px;user-select:none;padding:3px 0}
+.pgroup h4.fold::before{content:"";width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor;transition:transform .15s}
+.pgroup.folded h4.fold::before{transform:rotate(-90deg)}
+.pgroup.folded .pgrid{display:none}
+.pgroup h4.fold:hover{color:var(--ink2)}
+.pitem{border-radius:8px;background:var(--surface)}
+
+/* ---------- ステージ / インスペクタ ---------- */
+.stage{background:var(--bg);overflow:hidden}
+/* 拡大縮小ボタンは常に右上 (下側はシミュレーション画面・操作バーと重なるため) */
+.zoombox{top:10px!important;bottom:auto!important;right:10px!important}
+/* 操作バーは横スクロールさせずに折り返す */
+.actbar{left:50%!important;transform:translateX(-50%)!important;max-width:calc(100% - 24px)!important;flex-wrap:wrap;justify-content:center;overflow:visible;row-gap:6px}
+.hint{max-width:min(430px,calc(100% - 190px))}
+.stage.docked #cv{bottom:var(--dockH,0px);height:auto}
+.stage.docked .actbar{bottom:calc(var(--dockH,0px) + 14px)}
+.stage.docked .popover{bottom:calc(var(--dockH,0px) + 74px)}
+.hint{border-radius:9px;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(6px)}
+.inspector{flex-basis:300px}
+.itabs button{font-size:11.5px;padding:10px 6px}
+.status{height:28px;background:var(--surface)}
+.chip.warnchip{color:var(--warn)}
+
+/* ---------- シミュレーション ドック ---------- */
+.simdock{position:absolute;left:0;right:0;bottom:0;height:var(--dockH,300px);z-index:6;display:flex;flex-direction:column;
+  background:var(--surface);border-top:1px solid var(--line2);box-shadow:0 -10px 30px rgba(10,20,26,.08)}
+.dk-grip{position:absolute;top:-5px;left:0;right:0;height:10px;cursor:ns-resize;z-index:2;touch-action:none}
+.dk-grip::after{content:"";position:absolute;left:50%;top:3px;width:42px;height:4px;margin-left:-21px;border-radius:99px;background:var(--line2)}
+.dk-grip:hover::after{background:var(--accent)}
+.dk-head{display:flex;align-items:center;gap:10px;padding:8px 10px 0;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.dk-types{display:flex;background:var(--surface3);border-radius:9px;padding:2px;gap:2px;flex:0 0 auto}
+.dk-types button{border:0;background:transparent;padding:5px 11px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap}
+.dk-types button[aria-selected="true"]{background:var(--surface);color:var(--accent);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.dk-params{display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:1 1 auto;min-width:0}
+.dk-f{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);white-space:nowrap}
+.dk-f input,.dk-f select{border:1px solid var(--line);background:var(--surface2);border-radius:6px;padding:4px 7px;font-family:var(--mono);font-size:12px;color:var(--ink)}
+.dk-f input:focus,.dk-f select:focus{outline:0;border-color:var(--accent)}
+.dk-note{font-size:11.5px;color:var(--muted)}
+.dk-run{display:flex;gap:4px;flex:0 0 auto}
+#dkRun{position:relative;overflow:hidden;padding:6px 14px}
+#dkRun svg{width:13px;height:13px}
+#dkRun.busy{pointer-events:none;opacity:.85}
+#dkRun.busy::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:var(--prog,0%);background:var(--accent-ink);opacity:.7;transition:width .2s}
+.dk-tabs{display:flex;gap:2px;flex:1 0 100%;order:9;margin-top:4px;overflow-x:auto;scrollbar-width:none}
+.dk-tabs button{border:0;background:transparent;padding:6px 10px 7px;font-size:11.5px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;position:relative}
+.dk-tabs button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.dk-tabs .dot{position:absolute;top:5px;right:3px;width:6px;height:6px;border-radius:50%;background:var(--warn)}
+#dkClose{position:absolute;right:10px;top:9px}
+.dk-head{position:relative;padding-right:46px}
+.dk-body{flex:1 1 auto;min-height:0;position:relative}
+.dk-pane{position:absolute;inset:0;overflow:auto;padding:8px 12px}
+#dkWave{display:flex;flex-direction:column;gap:6px;overflow-y:auto}
+#dkWave[hidden]{display:none}
+.wv-legend{display:flex;align-items:center;gap:5px;flex-wrap:wrap;flex:0 0 auto}
+.wv-chip{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:99px;padding:2px 4px 2px 8px;font-family:var(--mono);font-size:11px;cursor:pointer;background:var(--surface2);user-select:none}
+.wv-chip i{width:10px;height:10px;border-radius:3px}
+.wv-chip.off{opacity:.45}
+.wv-chip .x{border:0;background:transparent;color:var(--faint);cursor:pointer;padding:0 4px;font-size:12px;border-radius:99px}
+.wv-chip .x:hover{color:var(--crit)}
+.wv-chip .fft{font-size:9px;font-weight:700;letter-spacing:.04em}
+.wv-chip .fft.on{background:var(--accent);color:var(--accent-ink)}
+.wv-add{border:1px dashed var(--line2);background:transparent;color:var(--accent);border-radius:99px;padding:3px 10px;font-size:11px;cursor:pointer}
+.wv-sp{flex:1}
+.wv-tool{border:1px solid var(--line);background:var(--surface);border-radius:7px;padding:3px 9px;font-size:11px;cursor:pointer;color:var(--muted)}
+.wv-tool.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.wv-plot{position:relative;flex:1 0 auto;min-height:120px;border-radius:9px;overflow:hidden;border:1px solid var(--line)}
+.wv-plot canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:crosshair;touch-action:none}
+.wv-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.8;padding:12px;background:var(--surface2)}
+.wv-empty[hidden]{display:none}
+.wv-foot{flex:0 0 auto;display:flex;flex-direction:column;gap:5px}
+.wv-time{display:flex;align-items:center;gap:8px}
+.wv-time input{flex:1;accent-color:var(--accent)}
+.wv-time b{font-family:var(--mono);font-size:11px;min-width:110px}
+.wv-time .btn{padding:3px 9px}
+.wv-meas{display:flex;flex-direction:column;gap:3px}
+.wv-m{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11px;font-family:var(--mono)}
+.wv-m i{width:9px;height:9px;border-radius:2px;flex:0 0 auto}
+.wv-m b{font-weight:600;min-width:90px}
+.wv-m span{color:var(--ink2);font-variant-numeric:tabular-nums}
+.wv-m em{font-style:normal;color:var(--faint);margin-right:4px;font-family:var(--ui)}
+.op-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.op-t{width:100%;border-collapse:collapse;font-size:12px}
+.op-t th{text-align:left;font-size:10px;color:var(--faint);font-weight:700;padding:3px 6px;border-bottom:1px solid var(--line)}
+.op-t td{padding:3px 6px;border-bottom:1px dotted var(--line)}
+.op-t td.num{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.op-t td.hot{color:var(--crit);font-weight:600}
+.op-t .chip{padding:1px 8px;font-size:10px}
+.dk-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.dk-check{display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;margin:4px 0}
+.dk-check input{accent-color:var(--accent)}
+.nl-ta{height:calc(100% - 110px);min-height:160px}
+.set-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:4px 14px}
+.siglist{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;max-height:50vh;overflow:auto}
+
+/* ---------- PCB 画面 ---------- */
+.body{position:relative}
+.pcbx{position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;background:var(--bg)}
+.pcbx[hidden]{display:none!important}
+.px-bar{display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1px solid var(--line);background:var(--surface);flex-wrap:wrap}
+.px-bar .btn.lyF{border-color:#d9534f;color:#d9534f}
+.px-bar .btn.lyB{border-color:#3c8ce7;color:#3c8ce7}
+.px-body{flex:1 1 auto;display:flex;min-height:0}
+.px-stage{flex:1 1 auto;position:relative;min-width:0}
+.px-stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.px-stage .hint{top:10px}
+.px-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;color:#cfd8de;line-height:1.9;font-size:13px;pointer-events:none}
+.px-side{flex:0 0 300px;background:var(--surface);border-left:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+.px-side .itabs button{flex:1 1 auto}
+body.pcbx-on .palette,body.pcbx-on #schTools,body.pcbx-on #pcbTools{display:none!important}
+
+/* ---------- コマンドパレット ---------- */
+.cmdk{position:fixed;inset:0;z-index:60;background:rgba(8,14,18,.45);display:flex;justify-content:center;align-items:flex-start;padding:10vh 16px 16px;backdrop-filter:blur(2px)}
+.cmdk[hidden]{display:none}
+.cmdk-box{width:min(620px,100%);background:var(--surface);border:1px solid var(--line2);border-radius:14px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column;max-height:70vh}
+.cmdk-box input{border:0;border-bottom:1px solid var(--line);padding:15px 18px;font-size:15px;background:transparent;outline:0;color:var(--ink)}
+.cmdk-list{overflow-y:auto;padding:6px}
+.cmdk-it{display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;text-align:left;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--ink)}
+.cmdk-it span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cmdk-it i{font-style:normal;width:16px;text-align:center;color:var(--faint);font-size:11px}
+.cmdk-it i.k-part{color:var(--copper)}
+.cmdk-it.on,.cmdk-it:hover{background:var(--accent-soft)}
+.cmdk-it.on i.k-cmd{color:var(--accent)}
+.cmdk-empty{padding:18px;text-align:center;color:var(--faint)}
+.cmdk-foot{border-top:1px solid var(--line);padding:7px 14px;font-size:11px;color:var(--faint)}
+
+/* ---------- トースト ---------- */
+.toasts{position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:80;display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none;width:min(520px,calc(100% - 32px))}
+.toast{background:var(--ink);color:var(--surface);padding:9px 14px;border-radius:10px;font-size:12.5px;box-shadow:var(--shadow-lg);animation:tin .2s ease-out;max-width:100%}
+.toast.err{background:var(--crit);color:#fff}
+.toast.ok{background:var(--accent);color:var(--accent-ink)}
+.toast.out{opacity:0;transform:translateY(-6px);transition:.3s}
+@keyframes tin{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+/* ---------- モーダル / 計算ツール ---------- */
+.sheet{border-radius:14px;box-shadow:var(--shadow-lg)}
+.sheet.wide{width:min(980px,100%);max-height:min(90vh,820px)}
+.content.calc{display:grid;grid-template-columns:190px 1fr;gap:0;padding:0;min-height:0}
+.calc-nav{display:flex;flex-direction:column;gap:1px;padding:8px;border-right:1px solid var(--line);background:var(--surface2);overflow-y:auto}
+.calc-nav button{border:0;background:transparent;text-align:left;padding:7px 10px;border-radius:7px;cursor:pointer;font-size:12.5px;color:var(--ink2)}
+.calc-nav button:hover{background:var(--surface)}
+.calc-nav button[aria-current="true"]{background:var(--accent);color:var(--accent-ink);font-weight:600}
+.calc-pane{padding:14px 18px 20px;overflow-y:auto;min-width:0}
+.calc-pane h4{margin:0 0 10px;font-size:16px}
+.calc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px 12px;margin:6px 0 8px}
+.calc-f{display:flex;flex-direction:column;gap:3px;font-size:11px;color:var(--muted);position:relative}
+.calc-f input,.calc-f select{border:1px solid var(--line);background:var(--surface2);border-radius:7px;padding:7px 9px;font-family:var(--mono);font-size:13px;color:var(--ink)}
+.calc-f input:focus,.calc-f select:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent)}
+.calc-f em{position:absolute;right:9px;bottom:8px;font-style:normal;font-size:11px;color:var(--faint);pointer-events:none}
+.calc-out{display:flex;flex-direction:column;gap:2px;margin-bottom:12px;border-left:3px solid var(--accent);padding:4px 0 4px 10px;background:linear-gradient(90deg,var(--accent-soft),transparent 70%);border-radius:0 8px 8px 0}
+.calc-r{display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:2px 8px 2px 0}
+.calc-r span{color:var(--muted)}
+.calc-r b{font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums;text-align:right}
+.calc-r.big b{font-size:15px;font-weight:600;color:var(--accent)}
+.rcc{margin:10px 0}
+.rcc-body{height:34px;width:min(280px,100%);border-radius:17px;background:linear-gradient(180deg,#e9d6ae,#cfb582);display:flex;gap:10px;padding:0 34px;position:relative;box-shadow:inset 0 -3px 0 rgba(0,0,0,.12)}
+.rcc-body::before,.rcc-body::after{content:"";position:absolute;top:15px;width:40px;height:4px;background:#9aa0a6}
+.rcc-body::before{left:-40px}.rcc-body::after{right:-40px}
+.rcc-body i{width:10px;height:100%}
+.rcc{padding-left:40px}
+.rcc-out{display:flex;flex-direction:column;gap:5px;margin-top:6px}
+.rcc-row{display:flex;gap:4px;align-items:center;font-size:11px;color:var(--muted)}
+.rcc-row span{min-width:56px}
+.rcc-row b{padding:2px 8px;border-radius:5px;font-weight:600;font-size:11px;border:1px solid rgba(0,0,0,.15)}
+.kbgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:4px 22px}
+.kbgrid .kv span:first-child{color:var(--ink2)}
+
+/* ---------- 狭い画面 ---------- */
+@media (max-width:1680px){
+  #bImport span,#bInsp span,#bCalc span,#bAll span,#bPal2 span,#bSample span,#tJunc span,#tDel span,#tMarq span,#bExport span,.cmdbtn span,.cmdbtn kbd{display:none}
+  .brand span{display:none}
+  .bar{gap:8px}
+  .tools{gap:6px}
+}
+@media (max-width:1180px){
+  #tProbe span{display:none}
+}
+@media (max-width:1000px){
+  .bar{height:auto}
+  .cmdbtn kbd{display:none}
+}
+@media (max-width:900px){
+  .px-body{flex-direction:column}
+  .px-side{flex:0 0 42%;border-left:0;border-top:1px solid var(--line)}
+  .content.calc{grid-template-columns:1fr}
+  .calc-nav{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line)}
+  .calc-nav button{white-space:nowrap}
+}
+@media (max-width:640px){
+  .palette{width:min(290px,86vw)}
+  .cmdbtn span,#bCalc span{display:none}
+  .dk-types button{padding:5px 8px;font-size:11px}
+  .dk-head{gap:6px}
+  .wv-m b{min-width:0}
+  .simdock{height:min(var(--dockH,300px),60vh)}
+  .stage.docked #cv{bottom:min(var(--dockH,300px),60vh)}
+}
+@media (max-width:420px){
+  .palette{position:absolute}
+}
+
+/* ---------- スマートフォン / Android アプリ: 画面外への見切れ防止 ---------- */
+html,body{overflow:hidden;overscroll-behavior:none;max-width:100%}
+.app{position:fixed;inset:0;height:auto;width:100%;max-width:100vw;overflow:hidden}
+.bar,.body,.status,.pcbx,.px-bar{max-width:100%;min-width:0}
+.status{flex-wrap:nowrap}
+@media (max-width:560px){
+  .bar,.bar.wrap{padding:5px 8px;gap:5px;row-gap:5px}
+  .brand b{display:none}
+  .brand{padding-right:0}
+  .bar > .tabs{flex:1 1 auto;min-width:0;padding:2px}
+  .bar > .tabs button{flex:1 1 auto;min-width:0;padding:6px 6px;font-size:12px;overflow:hidden;text-overflow:ellipsis}
+  .bar .btn.icon,.bar > .btn{padding:6px 8px}
+  .tools{gap:5px;row-gap:5px}
+  .zoombox{right:8px;max-width:calc(100% - 16px)}
+  .zoombox .btn{padding:5px 9px}
+  .px-bar{gap:5px;padding:5px 6px}
+  .px-bar .toolgroup{flex:0 1 auto;flex-wrap:wrap;max-width:100%}
+  .px-bar .btn{padding:6px 8px;font-size:12px}
+  .px-side{flex-basis:40%}
+  /* DRC / ガーバー出力 は下のサイドタブ (DRC・出力) からも使えるので省略 */
+  .px-bar .toolgroup:last-child{display:none}
+  .px-bar .toolgroup{padding:1px;gap:1px}
+  .px-side .itabs{display:flex}
+  .px-side .itabs button{flex:1 1 0;min-width:0;padding:10px 2px;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .px-side .field{min-width:0}
+  .status{padding:0 8px;font-size:10px}
+  .status .s{padding:0 7px}
+}
+@media (max-width:380px){
+  .brand .logo{width:22px;height:22px}
+  .bar > .tabs button{padding:6px 4px;font-size:11.5px}
+  .bar .btn.icon,.bar > .btn{padding:5px 7px}
+  .px-bar .btn{padding:5px 7px;font-size:11.5px}
+}
+.kv.bm-ok span:last-child{color:var(--ok);font-weight:600}
+.kv.bm-warn span:last-child{color:var(--warn);font-weight:600}

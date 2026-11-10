@@ -1,0 +1,285 @@
+/* =====================================================================
+   UniBoard SPICE — Pro テーマ (Web 版の標準)
+   デスクトップのデザインツール風: 無彩色のグレー + 青 1 色のアクセント。
+   角丸は小さく、影は最小限、キャンバスに重なる要素を減らす。
+   html.pro のときだけ効く (Android アプリは html.md のまま)
+   ===================================================================== */
+html.pro{
+  --chrome:#E4E4E4; --chrome-line:#CFCFCF;
+  --bg:#F1F1F1; --surface:#F7F7F7; --surface2:#FFFFFF; --surface3:#E9E9E9;
+  --ink:#1F1F1F; --ink2:#444444; --muted:#686868; --faint:#8C8C8C;
+  --line:#DCDCDC; --line2:#C4C4C4;
+  --hover:rgba(0,0,0,.06); --sel:rgba(20,115,230,.12);
+  --accent:#1473E6; --accent-ink:#FFFFFF; --accent-soft:#DDEBFC;
+  --ok:#12805C; --warn:#B66A00; --crit:#D7373F;
+  --grid:#DADADA; --gridmaj:#C3C3C3;
+  --shadow:0 1px 2px rgba(0,0,0,.10),0 2px 8px rgba(0,0,0,.08);
+  --shadow-lg:0 8px 28px rgba(0,0,0,.22);
+  --ui:"Source Sans 3","Noto Sans JP","Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,system-ui,sans-serif;
+  --mono:"Source Code Pro",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --r:4px; --barH:40px; --ctl:28px; --footH:24px; --botH:0px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){ html.pro:not([data-theme="light"]){
+  --chrome:#1E1E1E; --chrome-line:#111111;
+  --bg:#191919; --surface:#2A2A2A; --surface2:#1E1E1E; --surface3:#363636;
+  --ink:#E8E8E8; --ink2:#C6C6C6; --muted:#9D9D9D; --faint:#747474;
+  --line:#3A3A3A; --line2:#4A4A4A;
+  --hover:rgba(255,255,255,.07); --sel:rgba(55,142,240,.20);
+  --accent:#378EF0; --accent-ink:#FFFFFF; --accent-soft:#1D3753;
+  --ok:#2D9D78; --warn:#E68619; --crit:#EC5B62;
+  --grid:#262626; --gridmaj:#323232;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 2px 10px rgba(0,0,0,.35);
+  --shadow-lg:0 10px 34px rgba(0,0,0,.6);
+  color-scheme:dark;
+}}
+html.pro[data-theme="dark"]{
+  --chrome:#1E1E1E; --chrome-line:#111111;
+  --bg:#191919; --surface:#2A2A2A; --surface2:#1E1E1E; --surface3:#363636;
+  --ink:#E8E8E8; --ink2:#C6C6C6; --muted:#9D9D9D; --faint:#747474;
+  --line:#3A3A3A; --line2:#4A4A4A;
+  --hover:rgba(255,255,255,.07); --sel:rgba(55,142,240,.20);
+  --accent:#378EF0; --accent-ink:#FFFFFF; --accent-soft:#1D3753;
+  --ok:#2D9D78; --warn:#E68619; --crit:#EC5B62;
+  --grid:#262626; --gridmaj:#323232;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 2px 10px rgba(0,0,0,.35);
+  --shadow-lg:0 10px 34px rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+
+html.pro body{font-family:var(--ui);font-size:12.5px;background:var(--chrome);color:var(--ink);font-feature-settings:"palt" 1;-webkit-tap-highlight-color:transparent}
+html.pro :focus-visible{outline:2px solid var(--accent);outline-offset:1px;border-radius:2px}
+html.pro ::selection{background:var(--accent);color:var(--accent-ink)}
+html.pro *{scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
+html.pro kbd{font-family:var(--mono);font-size:10px;border-radius:3px;padding:0 4px;border:1px solid var(--line2);background:var(--surface2);color:var(--muted)}
+html.pro .app{bottom:var(--botH)}
+
+/* ---------- 上のバー ---------- */
+html.pro .bar{min-height:var(--barH);height:auto;padding:0 8px;gap:6px;background:var(--chrome);border-bottom:1px solid var(--chrome-line);box-shadow:none}
+html.pro .bar.wrap{padding-block:4px}
+html.pro .brand{gap:8px;padding:0 6px 0 2px}
+html.pro .brand .logo{width:22px;height:22px}
+html.pro .brand .lg-bg{fill:var(--accent)}
+html.pro .brand .lg-dot{fill:#fff;opacity:.5}
+html.pro .brand .lg-wave{fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+html.pro .brand b{font-family:var(--ui);font-size:13px;font-weight:700;letter-spacing:0;color:var(--ink)}
+html.pro .brand span{display:inline;font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:0}
+html.pro .sep{height:20px;background:var(--line2);margin:0 2px}
+
+/* ワークスペース切替 (回路図 / 蛇の目基板 / PCB) */
+html.pro .bar > .tabs{background:transparent;border:0;padding:0;gap:0;border-radius:0;align-self:stretch}
+html.pro .bar > .tabs button{position:relative;height:100%;min-height:var(--barH);padding:0 12px;border-radius:0;font-size:12.5px;font-weight:600;color:var(--muted);background:transparent;box-shadow:none}
+html.pro .bar > .tabs button:hover{color:var(--ink);background:var(--hover)}
+html.pro .bar > .tabs button[aria-selected="true"]{color:var(--ink);background:transparent;box-shadow:none}
+html.pro .bar > .tabs button[aria-selected="true"]::after{content:"";position:absolute;left:10px;right:10px;bottom:0;height:2px;background:var(--accent)}
+
+/* ツール */
+html.pro .tools{gap:4px}
+html.pro .toolgroup{background:transparent;border:0;border-radius:0;padding:0 4px 0 0;gap:1px}
+html.pro .toolgroup + .toolgroup{padding-left:5px;border-left:1px solid var(--line2)}
+html.pro .btn{height:var(--ctl);min-height:var(--ctl);padding:0 8px;border-radius:var(--r);border:1px solid transparent;background:transparent;color:var(--ink2);font-size:12px;font-weight:500;gap:5px;box-shadow:none;transition:background .1s,color .1s,border-color .1s}
+html.pro .btn:hover{background:var(--hover);border-color:transparent}
+html.pro .btn:active{transform:none;background:var(--line)}
+html.pro .btn svg{width:16px;height:16px}
+html.pro .btn.icon{padding:0 6px;min-width:var(--ctl);justify-content:center;font-family:var(--ui)}
+html.pro .btn[aria-pressed="true"],html.pro .toolgroup .btn[aria-pressed="true"]{background:var(--sel);border-color:transparent;color:var(--accent);box-shadow:none}
+html.pro .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+html.pro .btn.primary:hover{filter:brightness(1.08);background:var(--accent)}
+html.pro .btn.dl,html.pro .bar .btn.dl{border-color:transparent;color:var(--ink2);font-weight:500}
+html.pro .btn.ghost{color:var(--muted)}
+html.pro .btn.danger{color:var(--crit);border-color:transparent}
+html.pro .btn.danger:hover{background:color-mix(in srgb,var(--crit) 12%,transparent)}
+html.pro .btn:disabled{opacity:.4}
+html.pro .bar > .btn{color:var(--muted)}
+html.pro .bar > .btn:hover{color:var(--ink)}
+html.pro .cmdbtn{border:1px solid var(--line2)!important;background:var(--surface2)!important;min-width:150px;justify-content:flex-start;color:var(--faint)!important}
+html.pro .cmdbtn span{flex:1;text-align:left}
+html.pro .simgroup #bRunQ{color:var(--ok)}
+html.pro .pclose{width:24px;height:24px;border:0;border-radius:var(--r);background:transparent;color:var(--muted);font-size:16px}
+html.pro .pclose:hover{background:var(--hover);color:var(--ink);border:0}
+
+/* 部品面 / 半田面 / 両面 */
+html.pro #viewTabs{display:flex;align-self:center;background:var(--surface2);border:1px solid var(--line2);border-radius:var(--r);padding:0;gap:0;overflow:hidden}
+html.pro #viewTabs button{height:calc(var(--ctl) - 2px);padding:0 10px;border-radius:0;font-size:12px;font-weight:500;color:var(--muted);background:transparent;box-shadow:none}
+html.pro #viewTabs button + button{border-left:1px solid var(--line2)}
+html.pro #viewTabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+
+/* PRO ボタン */
+.pro-badge{display:none}
+html.pro .pro-badge{display:inline-flex}
+html.pro .btn.pro-badge{border:1px solid var(--line2);color:var(--ink2);font-weight:700;letter-spacing:.04em;font-size:11px}
+html.pro .btn.pro-badge svg{width:13px;height:13px}
+html.pro .btn.pro-badge.on{border-color:color-mix(in srgb,var(--ok) 60%,transparent);color:var(--ok)}
+html.pro .pro-more{display:none}
+
+/* ---------- パネル共通 ---------- */
+html.pro .palette,html.pro .inspector,html.pro .px-side{background:var(--surface);border-color:var(--chrome-line)}
+html.pro .palette{flex-basis:236px;width:236px;border-right:1px solid var(--chrome-line)}
+html.pro .inspector{flex-basis:272px;border-left:1px solid var(--chrome-line)}
+html.pro .phead{height:30px;padding:0 4px 0 10px;border-bottom:1px solid var(--line);background:var(--surface3)}
+html.pro .phead b{font-size:11px;font-weight:700;letter-spacing:.02em;text-transform:none;color:var(--ink2)}
+html.pro .pcount{background:transparent;color:var(--faint);font-family:var(--mono);font-size:10px;padding:0}
+html.pro .libsearch{padding:8px;gap:6px;border-bottom:1px solid var(--line)}
+html.pro .ls-in{height:26px;border:1px solid var(--line2);border-radius:var(--r);background:var(--surface2);padding:0 6px;gap:5px}
+html.pro .ls-in:focus-within{border-color:var(--accent);box-shadow:none}
+html.pro .ls-in svg{width:13px;height:13px}
+html.pro .ls-in input{font-size:12px;padding:0}
+html.pro .ls-cats{gap:3px}
+html.pro .lc{height:20px;padding:0 7px;border-radius:3px;border:1px solid var(--line);background:transparent;color:var(--muted);font-size:11px}
+html.pro .lc:hover{color:var(--ink);background:var(--hover)}
+html.pro .lc[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+html.pro .ls-list{border:1px solid var(--line);border-radius:var(--r);background:var(--surface2)}
+html.pro .lr{border-bottom:1px solid var(--line);padding:0 8px;gap:8px}
+html.pro .lr:hover{background:var(--hover)}
+html.pro .lr[aria-pressed="true"]{background:var(--sel);box-shadow:inset 2px 0 0 var(--accent)}
+html.pro .lt b{font-size:12px;font-weight:600}
+html.pro .lt em{font-size:10.5px}
+html.pro .lh{font-size:10px;letter-spacing:.04em;text-transform:none;color:var(--faint);font-weight:600}
+html.pro .pbody{padding:6px 8px 40px}
+html.pro .pgroup{margin-bottom:6px}
+html.pro .pgroup h4{font-size:11px;letter-spacing:0;text-transform:none;color:var(--ink2);font-weight:600;padding:4px 0}
+html.pro .pgrid{gap:3px}
+html.pro .pitem{border:1px solid transparent;border-radius:3px;background:var(--surface2);padding:4px 2px 3px}
+html.pro .pitem:hover{border-color:var(--line2);background:var(--surface2)}
+html.pro .pitem[aria-pressed="true"]{border-color:var(--accent);background:var(--sel);box-shadow:none}
+html.pro .pitem em{font-size:9px;color:var(--muted)}
+html.pro .pitem.plus{border:1px dashed var(--line2);color:var(--accent)}
+
+html.pro .itabs{background:var(--surface3);border-bottom:1px solid var(--line)}
+html.pro .itabs button{height:30px;padding:0 10px;font-size:11.5px;font-weight:600;color:var(--muted);border-bottom:0;position:relative;flex:0 0 auto}
+html.pro .itabs button:hover{color:var(--ink)}
+html.pro .itabs button[aria-selected="true"]{color:var(--ink);background:var(--surface)}
+html.pro .itabs button[aria-selected="true"]::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--accent)}
+html.pro .itabs .pclose{margin-left:auto}
+html.pro .ipane{padding:10px 12px}
+html.pro .field label,html.pro h5.sec{font-size:10.5px;letter-spacing:.02em;text-transform:none;color:var(--muted);font-weight:600}
+html.pro h5.sec{padding-bottom:3px;border-bottom:1px solid var(--line);margin:14px 0 6px}
+html.pro .field input,html.pro .field select,html.pro .calc-f input,html.pro .calc-f select,html.pro .dk-f input,html.pro .dk-f select,html.pro .popinput,html.pro textarea.code,html.pro .sizerow input{
+  border:1px solid var(--line2);border-radius:var(--r);background:var(--surface2);color:var(--ink);box-shadow:none}
+html.pro .field input,html.pro .field select{height:26px;padding:0 7px;font-size:12px}
+html.pro .field input:focus,html.pro .field select:focus,html.pro .calc-f input:focus,html.pro .calc-f select:focus,html.pro .dk-f input:focus,html.pro .dk-f select:focus,html.pro .popinput:focus,html.pro textarea.code:focus{outline:0;border-color:var(--accent);box-shadow:none}
+html.pro input[type=checkbox],html.pro input[type=radio],html.pro input[type=range]{accent-color:var(--accent)}
+html.pro .kv{border-bottom:1px solid var(--line);padding:4px 0;font-size:12px}
+html.pro .kv span:first-child{color:var(--muted)}
+html.pro .netrow{border-radius:3px;padding:5px 7px}
+html.pro .netrow:hover{background:var(--hover)}
+html.pro .netrow[aria-selected="true"]{background:var(--sel);border-color:transparent;box-shadow:inset 2px 0 0 var(--accent)}
+html.pro .chip{border-radius:3px;border-color:var(--line2);background:var(--surface2);padding:2px 8px;font-size:11px}
+html.pro .chip:hover{border-color:var(--accent);color:var(--accent)}
+html.pro .chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+html.pro .msg{border-radius:3px}
+html.pro .empty{color:var(--faint)}
+
+/* ---------- キャンバス ---------- */
+html.pro .stage{background:var(--bg)}
+html.pro .zoombox{top:8px!important;right:8px!important;bottom:auto!important;gap:0;border:1px solid var(--line2);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+html.pro .zoombox .btn{height:24px;min-height:24px;padding:0 8px;border-radius:0;box-shadow:none;font-size:11.5px;color:var(--ink2)}
+html.pro .zoombox .btn + .btn{border-left:1px solid var(--line)}
+html.pro .monotoggle{height:24px;min-height:24px;top:8px;border:1px solid var(--line2);background:var(--surface);color:var(--ink2);box-shadow:var(--shadow);border-radius:var(--r)}
+html.pro .monotoggle[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+html.pro .actbar{left:50%!important;transform:translateX(-50%)!important;bottom:10px;max-width:calc(100% - 20px)!important;flex-wrap:wrap;justify-content:center;row-gap:4px;
+  border:1px solid var(--line2);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow-lg);padding:4px;gap:2px}
+html.pro .actbar b{font-size:11.5px;color:var(--muted);padding:0 6px}
+html.pro .actbar .btn{border:1px solid transparent}
+html.pro .popover{border:1px solid var(--line2);border-radius:6px;background:var(--surface);box-shadow:var(--shadow-lg);padding:10px 12px 12px}
+html.pro .popinput{font-size:14px;padding:6px 8px}
+html.pro .prog{border-radius:6px;border-color:var(--line2);box-shadow:var(--shadow-lg)}
+html.pro .bar-track{border-radius:0;height:3px}
+
+/* ヒントはキャンバスに重ねずフッターに出す */
+.pro-foot{display:none}
+html.pro .pro-foot{display:flex;align-items:center;flex:0 0 auto;min-height:var(--footH);background:var(--chrome);border-top:1px solid var(--chrome-line);min-width:0;max-width:100%}
+html.pro .pro-foot .hint{position:static!important;flex:1 1 auto;min-width:0;max-width:none!important;display:block!important;
+  border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none;padding:0 10px;font-size:11.5px;line-height:var(--footH);
+  color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:auto}
+html.pro .pro-foot .hint b{color:var(--ink);font-weight:600}
+html.pro .pro-foot .hint:empty{display:none!important}
+html.pro .pro-foot #pxHint{display:none!important}
+html.pro body.pcbx-on .pro-foot #pxHint{display:block!important}
+html.pro body.pcbx-on .pro-foot #hint{display:none!important}
+html.pro body.pcbx-on .pro-foot .status{display:none}
+html.pro .pro-foot .status{flex:0 1 auto;height:var(--footH);border:0;background:transparent;border-left:1px solid var(--line);font-family:var(--ui);font-size:11px;padding:0 10px;color:var(--muted)}
+html.pro .pro-foot .status .s{border-right-color:var(--line);padding:0 8px}
+html.pro .pro-foot .status .s b{font-family:var(--mono);font-weight:500}
+
+/* ---------- シミュレーション ---------- */
+html.pro .simdock{background:var(--surface);border-top:1px solid var(--chrome-line);box-shadow:0 -2px 10px rgba(0,0,0,.12)}
+html.pro .dk-grip::after{width:36px;height:3px;border-radius:2px;background:var(--line2)}
+html.pro .dk-head{padding:6px 8px 0;gap:8px;border-bottom:1px solid var(--line)}
+html.pro .dk-types{background:var(--surface2);border:1px solid var(--line2);border-radius:var(--r);padding:0;gap:0;overflow:hidden}
+html.pro .dk-types button{height:24px;padding:0 10px;border-radius:0;font-size:11.5px;font-weight:600;color:var(--muted);box-shadow:none}
+html.pro .dk-types button + button{border-left:1px solid var(--line2)}
+html.pro .dk-types button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);box-shadow:none}
+html.pro .dk-f{font-size:11px}
+html.pro .dk-f input,html.pro .dk-f select{height:24px;padding:0 6px;font-size:12px}
+html.pro #dkRun{height:26px;padding:0 14px}
+html.pro .dk-tabs button{height:28px;padding:0 10px;font-size:11.5px;border-bottom:2px solid transparent}
+html.pro .dk-tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+html.pro .wv-chip,html.pro .wv-add,html.pro .wv-tool{border-radius:3px;border-color:var(--line2);background:var(--surface2)}
+html.pro .wv-tool.on{background:var(--sel);color:var(--accent);border-color:var(--accent)}
+html.pro .wv-plot{border-radius:var(--r);border-color:var(--line2)}
+
+/* ---------- PCB ---------- */
+html.pro .pcbx{background:var(--bg)}
+html.pro .px-bar{background:var(--chrome);border-bottom:1px solid var(--chrome-line);padding:4px 8px;gap:4px 6px}
+html.pro .px-bar .toolgroup{gap:1px}
+html.pro .px-bar .btn.lyF{border:1px solid #E5534B;color:#E5534B}
+html.pro .px-bar .btn.lyB{border:1px solid #4C9AFF;color:#4C9AFF}
+html.pro .px-side .itabs button{flex:1 1 auto}
+html.pro .px-empty{color:#B8B8B8}
+
+/* ---------- ダイアログ / メニュー / 検索 ---------- */
+html.pro .modal{background:rgba(0,0,0,.45)}
+html.pro .sheet{border:1px solid var(--line2);border-radius:6px;background:var(--surface);box-shadow:var(--shadow-lg)}
+html.pro .sheet header{padding:10px 12px 10px 16px;border-bottom:1px solid var(--line);background:var(--surface3)}
+html.pro .sheet header h3{font-size:13.5px;font-weight:700}
+html.pro .sheet .content{padding:14px 16px}
+html.pro .sheet footer{border-top:1px solid var(--line);padding:8px 12px}
+html.pro #modalClose{border:1px solid var(--line2)}
+html.pro .scard{border:1px solid var(--line);border-radius:var(--r);background:var(--surface2);padding:10px 12px}
+html.pro .scard:hover{border-color:var(--accent);background:var(--sel)}
+html.pro .scard b{font-size:13px;font-weight:600}
+html.pro .segbtn{border:1px solid var(--line2);border-radius:var(--r);background:var(--surface2)}
+html.pro .segbtn:hover{border-color:var(--accent)}
+html.pro .segbtn[aria-pressed="true"]{border-color:var(--accent);background:var(--sel);box-shadow:inset 0 0 0 1px var(--accent)}
+html.pro .segbtn[aria-pressed="true"] b{color:var(--accent)}
+html.pro .dropzone{border-radius:6px}
+html.pro .calc-nav{background:var(--surface3)}
+html.pro .calc-nav button{border-radius:3px;padding:6px 10px;font-size:12px}
+html.pro .calc-nav button[aria-current="true"]{background:var(--accent);color:var(--accent-ink)}
+html.pro .calc-out{border-left:2px solid var(--accent);background:var(--sel);border-radius:0 var(--r) var(--r) 0}
+html.pro .calc-r.big b{color:var(--accent)}
+html.pro .cmdk{background:rgba(0,0,0,.45);backdrop-filter:none}
+html.pro .cmdk-box{border:1px solid var(--line2);border-radius:6px;background:var(--surface);box-shadow:var(--shadow-lg)}
+html.pro .cmdk-box input{padding:12px 14px;font-size:14px}
+html.pro .cmdk-it{border-radius:3px;padding:6px 10px;font-size:12.5px}
+html.pro .cmdk-it.on,html.pro .cmdk-it:hover{background:var(--sel)}
+html.pro .toasts{top:auto;bottom:calc(var(--footH) + var(--botH) + 14px);left:50%;transform:translateX(-50%)}
+html.pro .toast{border-radius:var(--r);background:var(--surface3);color:var(--ink);border:1px solid var(--line2);font-size:12.5px;padding:8px 12px;box-shadow:var(--shadow-lg)}
+html.pro .toast.ok{background:var(--surface3);color:var(--ink);border-left:3px solid var(--ok)}
+html.pro .toast.err{background:var(--surface3);color:var(--ink);border-left:3px solid var(--crit)}
+
+.pro-menu{position:fixed;z-index:70;min-width:220px;max-width:min(300px,calc(100vw - 16px));max-height:calc(100vh - 70px);overflow-y:auto;padding:4px;
+  border:1px solid var(--line2);border-radius:6px;background:var(--surface);box-shadow:var(--shadow-lg)}
+.pro-menu button{display:flex;align-items:center;gap:10px;width:100%;min-height:34px;padding:0 10px;border:0;border-radius:3px;background:transparent;color:var(--ink);font:inherit;font-size:13px;text-align:left;cursor:pointer}
+.pro-menu button:hover{background:var(--sel)}
+.pro-menu button svg{width:16px;height:16px;flex:0 0 16px;color:var(--muted)}
+.pro-menu button span{flex:1}
+.pro-menu button em{font-style:normal;font-size:11px;color:var(--faint)}
+.pro-menu hr{border:0;border-top:1px solid var(--line);margin:4px 0}
+
+/* PRO 解除ダイアログ */
+.pro-unlock{display:flex;flex-direction:column;gap:12px;max-width:520px}
+.pro-unlock .pu-head{display:flex;gap:12px;align-items:flex-start}
+.pro-unlock .pu-ico{flex:0 0 40px;height:40px;border-radius:6px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center}
+.pro-unlock .pu-ico svg{width:22px;height:22px}
+.pro-unlock h4{margin:0 0 2px;font-size:15px}
+.pro-unlock p{margin:0;color:var(--muted);line-height:1.7;font-size:12.5px}
+.pro-unlock ul{margin:0;padding-left:18px;line-height:1.8;font-size:12.5px}
+.pro-unlock .pu-row{display:flex;gap:6px}
+.pro-unlock .pu-row input{flex:1;min-width:0;height:32px;border:1px solid var(--line2);border-radius:var(--r);background:var(--surface2);color:var(--ink);padding:0 10px;font-size:14px;font-family:var(--mono)}
+.pro-unlock .pu-row input:focus{outline:0;border-color:var(--accent)}
+.pro-unlock .pu-row .btn{height:32px}
+.pro-unlock .pu-err{color:var(--crit);font-size:12px;min-height:1em}
+.pro-unlock .pu-ok{color:var(--ok);font-weight:600}
+.pro-unlock a{color:var(--accent)}
